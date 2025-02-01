@@ -1,0 +1,94 @@
+<!-- events.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        Timeline Generator
+        <a href="index.html" class="goback">Go back</a>
+    </div>
+
+    <h1>Create Events</h1>
+    
+    <div class="addevent">
+        <form id="eventForm">
+            <label for="eventDate">Choose a date:</label>
+            <input type="date" id="eventDate" required><br>
+
+            <label for="eventTitle">Event Name:</label>
+            <input type="text" id="eventTitle" required><br>
+
+            <label for="eventDescription">Event Description:</label>
+            <textarea id="eventDescription" required></textarea><br>
+
+            <button type="submit">Submit Event</button>
+        </form>
+
+        <button id="createTimeline">Submit and Create Timeline</button>
+    </div>
+
+    <div class="eventList"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let events = JSON.parse(localStorage.getItem("currentEvents")) || [];
+            let editingIndex = null;
+
+            function updateEventList() {
+                const eventList = document.querySelector(".eventList");
+                eventList.innerHTML = "";
+                events.sort((a, b) => new Date(a.date) - new Date(b.date));
+                events.forEach((event, index) => {
+                    const div = document.createElement("div");
+                    div.innerHTML = `
+                        <strong>${event.date} - ${event.title}</strong>: ${event.description}
+                        <button onclick="editEvent(${index})">Edit</button>
+                    `;
+                    eventList.appendChild(div);
+                });
+            }
+
+            document.getElementById("eventForm").addEventListener("submit", function (e) {
+                e.preventDefault();
+                const date = document.getElementById("eventDate").value;
+                const title = document.getElementById("eventTitle").value;
+                const description = document.getElementById("eventDescription").value;
+                if (editingIndex !== null) {
+                    events[editingIndex] = { date, title, description };
+                } else {
+                    events.push({ date, title, description });
+                }
+
+                localStorage.setItem("currentEvents", JSON.stringify(events));
+                updateEventList();
+                e.target.reset();
+                editingIndex = null;
+            });
+
+            // ✅ Make editEvent global
+            window.editEvent = function (index) {
+                editingIndex = index;
+                const event = events[index];
+                document.getElementById("eventDate").value = event.date;
+                document.getElementById("eventTitle").value = event.title;
+                document.getElementById("eventDescription").value = event.description;
+            };
+
+            document.getElementById("createTimeline").addEventListener("click", function () {
+                let timelines = JSON.parse(localStorage.getItem("timelines")) || [];
+                timelines.push(events);
+                localStorage.setItem("timelines", JSON.stringify(timelines));
+                localStorage.removeItem("currentEvents");
+                window.location.href = "timeline.html";
+            });
+
+            updateEventList();
+        });
+    </script>
+</body>
+</html>

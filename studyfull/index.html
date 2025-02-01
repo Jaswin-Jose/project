@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>first</title>
+        <link rel="stylesheet" href="style.css">
+        <script>
+           /*document.addEventListener("DOMContentLoaded",function(){ 
+                const historydiv=document.querySelector(".historycontent");
+                const timelines=JSON.parse(localStorage.getItem("timelines"))||[];
+
+                if (timelines.length===0){
+                    historydiv.innerHTML='<p class="nohistory"> No previously created timelines available</p>';
+                }else{
+                    timelines.forEach((timeline,index)=>{
+                        const link=document.createElement("a");
+                        link.href=`timeline.html?index=${index}`;
+                        link.className="pbox";
+                        link.textContent=`Timeline ${index+1}`;
+                        historydiv.appendChild(link);
+                    });
+                }
+           });*/
+           document.addEventListener("DOMContentLoaded",function(){
+            const historydiv=document.querySelector(".historycontent");
+            const timelines=JSON.parse(localStorage.getItem("timelines"))||[];
+
+            if (historydiv.length===0){
+                historydiv.innerHTML='<p class="nohistory"> No previously created timelines</p>'
+            }else{
+                timelines.forEach((timeline,index)=>{
+                    const link=document.createElement("a");
+                    link.href=`timeline.html?index=${index}`;
+                    link.className="pbox";
+                    link.textContent=`Timeline {index+1}`;
+                    historydiv.appendChild(link);
+                });
+            }
+           })
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Timeline Generator</h1>
+        </div>
+        <div class="addevent">
+            <a href="addevent.htm" class="addcard"><img src="plus.png" class="plusicon"><h1 class="addeventbutton">Create Timeline</h1></a>
+            <img src="clock.png" class="clockimage">
+            <div class="quotecontainer">
+                <p class="quote">A timeline is a linear representation of cause and effect, changing one event alters that flow.</p>
+            </div>
+            </div>
+        <div class="history">
+            <div class="htitle">&nbsp;Previously Created &nbsp;</div>
+            <div class="historycontent">
+                
+            </div>
+        </div>
+    </body>
+</html>
