@@ -17,7 +17,6 @@ function generateRandomText(){
         allLetters[0].classList.add("selected");
     }
 }
-
 function letterMakers(words){
     const wordDiv=document.createElement("div");
     wordDiv.classList.add('wordDiv');
@@ -26,8 +25,6 @@ function letterMakers(words){
         letterSpan.textContent=letter;
         letterSpan.classList.add('letter');
         wordDiv.appendChild(letterSpan);
-
-
     });
     const spaceSpan=document.createElement("span");
     spaceSpan.textContent=" ";
@@ -35,22 +32,17 @@ function letterMakers(words){
     wordDiv.appendChild(spaceSpan)
     return wordDiv;
 }
-
 function startGame(){
     currentLetterIndex=0;
     currentWordIndex=0;
     question.innerHTML="";
     generateRandomText();
-    document.removeEventListener("keydown", inputCheck); 
-    document.addEventListener("keydown", inputCheck);
 }
-
 function inputCheck(event){
     const ignore=["Shift", "Enter", "Tab", "CapsLock", "Control", "Alt", "Meta", 
         "Escape", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"]
     if (ignore.includes(event.key))return;
     if (!allLetters || allLetters.length === 0) return; 
-
     if (event.key==="Backspace"){
         if (currentLetterIndex>0){
             allLetters[currentLetterIndex].classList.remove("selected")
@@ -61,7 +53,6 @@ function inputCheck(event){
         }
         return;
     }
-
     const currentLetter=allLetters[currentLetterIndex];
     if (event.key===currentLetter.textContent){
         currentLetter.classList.add("correct");
@@ -78,7 +69,6 @@ function inputCheck(event){
         if (currentLetterIndex<allLetters.length){
             allLetters[currentLetterIndex].classList.add("selected");
         }
-
     }
     else if(event.key===" "){
         if (currentLetter.textContent===" "){
@@ -96,8 +86,6 @@ function inputCheck(event){
     const cpmValue=document.getElementById("cpmValue");
     cpmValue.textContent=correctValue*2/5
 }
-
-
 document.addEventListener("keydown",inputCheck)
 let timeleft=30;
 let timeinterval;
@@ -109,13 +97,11 @@ let timeinterval;
             timeleft--;
             document.getElementById("timeleft").textContent=timeleft;
             if (timeleft<=0){
-                clearInterval(timeinterval);
                 document.getElementById("timeleft").textContent="Times up!";
                 document.removeEventListener("keydown", inputCheck);
-
             }
         },1000);
     }
-newGameButton.addEventListener("click",function(){startGame();countdown()});
+newGameButton.addEventListener("click",function(){startGame();countdown();location.reload()});
 startGame();
 countdown();

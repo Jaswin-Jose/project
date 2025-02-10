@@ -89,48 +89,48 @@ h1 {
 #info{
     display: flex;
     flex-direction: row;
-    justify-content: end;
-    align-items: center;
+    justify-content: center;
 }
+#timeleft, #accuracyValue, #cpmValue {
+    font-size: 30px;
+    color: black;
+    min-width: 100px;
+    text-align: center;
+}
+
+#timeleft {
+    color: red;
+}
+
 .timer{
     display: flex;
     flex-direction: row;
     justify-content: end;
     align-items: center;
 }
+
 #clock{
     font-size: 40px;
 }
-#timeleft{
-    font-size: 30px;
-    color:red
-}
-
 .accuracy{
     display: flex;
     flex-direction: row;
     justify-content: end;
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 #aim{
     font-size: 40px;
 }
-#accuracyValue{
-    font-size: 30px;
-    color:black
-}
-
-
 .cpm{
     display: flex;
     flex-direction: row;
     justify-content: end;
     align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 #car{
     font-size: 40px;
-}
-#cpmValue{
-    font-size: 30px;
-    color:black
 }
