@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Typing Game</h1>
+        <div id="game">
+            <div id="info">
+                <div class="timer">
+                    <div id="clock">⏰</div>
+                    <div id="timeleft">30</div>
+                </div>
+                <div class="accuracy">
+                    <div id="aim">🎯</div>
+                    <div id="accuracyValue">0</div>
+                </div>
+                <div class="cpm">
+                    <div id="car">🏎️</div>
+                    <div id="cpmValue">0</div>
+                </div>
+            </div>
+            <div id="words" class="text-display"></div>
+            <button id="newGameBtn">New Game</button>
+        </div>
+    </div>
+    <script src="typespeed.js"></script>
+</body>
+</html>
